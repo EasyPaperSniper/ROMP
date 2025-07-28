@@ -14,7 +14,7 @@ from .utils import img_preprocess, create_OneEuroFilter, euclidean_distance, che
 from vis_human import setup_renderer, rendering_romp_bev_results
 from .post_parser import CenterMap
 
-def romp_settings(input_args=sys.argv[1:]):
+def romp_settings(input_args=None):
     parser = argparse.ArgumentParser(description = 'ROMP: Monocular, One-stage, Regression of Multiple 3D People')
     parser.add_argument('-m', '--mode', type=str, default='image', help = 'Inferece mode, including image, video, webcam')
     parser.add_argument('-i', '--input', type=str, default=None, help = 'Path to the input image / video')
@@ -59,7 +59,6 @@ def romp_settings(input_args=sys.argv[1:]):
         download_model(romp_onnx_url, args.model_onnx_path, 'ROMP')
     return args
 
-default_settings = romp_settings(input_args=[])
 
 class ROMP(nn.Module):
     def __init__(self, romp_settings):
