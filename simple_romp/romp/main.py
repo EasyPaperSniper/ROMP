@@ -40,23 +40,7 @@ def romp_settings(input_args=None):
     parser.add_argument('--webcam_id',type=int, default=0, help = 'The Webcam ID.')
     args = parser.parse_args(input_args)
 
-    if not torch.cuda.is_available():
-        args.GPU = -1
-        args.temporal_optimize = False
-    if args.show:
-        args.render_mesh = True
-    if args.render_mesh or args.show_largest:
-        args.calc_smpl = True
-    if not os.path.exists(args.smpl_path):
-        if os.path.exists(args.smpl_path.replace('SMPL_NEUTRAL.pth', 'smpl_packed_info.pth')):
-            args.smpl_path = args.smpl_path.replace('SMPL_NEUTRAL.pth', 'smpl_packed_info.pth')
-        print('please prepare SMPL model files following instructions at https://github.com/Arthur151/ROMP/blob/master/simple_romp/README.md#installation')
-    if not os.path.exists(args.model_path):
-        romp_url = 'https://github.com/Arthur151/ROMP/releases/download/V2.0/ROMP.pkl'
-        download_model(romp_url, args.model_path, 'ROMP')
-    if not os.path.exists(args.model_onnx_path) and args.onnx:
-        romp_onnx_url = 'https://github.com/Arthur151/ROMP/releases/download/V2.0/ROMP.onnx'
-        download_model(romp_onnx_url, args.model_onnx_path, 'ROMP')
+    
     return args
 
 
